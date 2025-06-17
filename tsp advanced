@@ -1,0 +1,37 @@
+import itertools
+import networkx as nx
+import matplotlib.pyplot as plt
+
+distances = {
+    'A': {'B': 20, 'C': 42, 'D': 35},
+    'B': {'A': 20, 'C': 30, 'D': 34},
+    'C': {'A': 42, 'B': 30, 'D': 12},
+    'D': {'A': 35, 'B': 34, 'C': 12},
+}
+
+def calculate_distance(route):
+    return sum(distances[route[i]][route[i+1]] for i in range(len(route)-1)) + distances[route[-1]][route[0]]
+
+cities = list(distances.keys())
+routes = list(itertools.permutations(cities))
+
+min_route = min(routes, key=calculate_distance)
+min_dist = calculate_distance(min_route)
+
+for r in routes:
+    print("Route:", r, "Distance:", calculate_distance(r))
+
+print("Minimum Route:", min_route)
+print("Minimum Distance:", min_dist)
+
+G = nx.Graph()
+for i in range(len(min_route)):
+    a = min_route[i]
+    b = min_route[(i + 1) % len(min_route)]
+    G.add_edge(a, b, weight=distances[a][b])
+
+pos = nx.circular_layout(G)
+nx.draw(G, pos, with_labels=True, node_color='skyblue', node_size=1200, font_size=14)
+nx.draw_networkx_edge_labels(G, pos, edge_labels=nx.get_edge_attributes(G, 'weight'))
+plt.title(f"{'->'.join(min_route)}->{min_route[0]} | Distance: {min_dist}")
+plt.show()
