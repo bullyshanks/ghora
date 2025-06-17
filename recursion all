@@ -1,0 +1,31 @@
+def division(s,odd="",even="",index=0):
+    if index>=len(s):
+        print(f"Positive Number:{even} Negative Number:{odd}")
+        return
+    if index%2==0:
+        odd+=s[index]
+    else:
+        even+=s[index]
+    division(s,odd,even,index+1)
+    
+division("12345")
+*******************************************************
+
+def division(s,index=0,ans=" "):
+    if index>=len(s):
+        print(f"Answer:{ans}")
+        return
+    ans+=str(int(s[index])//2)
+    division(s,index+1,ans)
+    
+division("248")
+*******************************************************
+
+def toh(n,s,a,d):
+    if n==1:
+        print(f"Move disk 1 from {s} to {d}")
+        return
+    toh(n-1,s,d,a)
+    print(f"Move disk {n} from {s} to {d}")
+    toh(n-1,a,s,d)     
+toh(3,'A','B','C')
