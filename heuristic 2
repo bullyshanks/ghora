@@ -1,0 +1,31 @@
+def heuristicgame(graph):
+    good_score=0;
+    bad_score=0;
+    print("Nodes:"," ,".join(graph.keys()))
+    print("Press 'EXIT' to quit")
+    while True:
+        node=input("Enter node:").strip().upper()
+        if node == 'EXIT':
+            break
+        if node not in graph or len(graph[node])<2:
+            print("Invalid node")
+            continue
+        while True:
+            choice=input("Choose 0 and 1:")
+            if choice in['0','1']:
+                choice=int(choice)
+                break
+        if graph[node][choice]>graph[node][1-choice]:
+            good_score+=1
+            print("+1 goodscore\n")
+        else:
+            bad_score-=1
+            print("-1 badscore\n")
+    print(f"Game over!! Bad:{bad_score},Good:{good_score}")
+            
+graph={
+    'A':[20,2],
+    'B':[1,44],
+    'C':[50]
+}
+heuristicgame(graph)
