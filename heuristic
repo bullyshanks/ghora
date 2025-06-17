@@ -1,0 +1,44 @@
+def methode(graph):
+    good_score = 0
+    bad_score = 0
+
+    for key, value in graph.items():
+        if len(value) >= 2:
+            print(f"\nCurrent node: {key}")
+            print(f"Options: [0] {value[0]} or [1] {value[1]}")
+
+            while True:
+                choice = input("Select option 0 or 1: ")
+                if choice in ['0', '1']:
+                    break
+                else:
+                    print("Invalid input. Please enter 0 or 1.")
+
+            selected = value[int(choice)]
+            other = value[1 - int(choice)]
+
+            if selected > other:
+                good_score += 1
+                print(f"You selected the bigger value ({selected}). +1 Good Score.")
+            else:
+                bad_score -= 1
+                print(f"You selected the smaller value ({selected}). -1 Bad Score.")
+
+    print("\n--- Final Results ---")
+    print(f"Good Score: {good_score}")
+    print(f"Bad Score: {bad_score}")
+
+graph = {
+    'A': ['C', 'B'],
+    'B': ['E', 'D'],
+    'C': ['G', 'F'],
+    'D': [],
+    'E': [],
+    'F': ['I', 'H'],
+    'G': [],
+    'H': [],
+    'I': [],
+    'J': []
+}
+
+methode(graph)
