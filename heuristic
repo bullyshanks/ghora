@@ -1,4 +1,4 @@
-def methode(graph):
+def play_game(graph):
     good_score = 0
     bad_score = 0
 
@@ -21,8 +21,8 @@ def methode(graph):
                 good_score += 1
                 print(f"You selected the bigger value ({selected}). +1 Good Score.")
             else:
-                bad_score -= 1
-                print(f"You selected the smaller value ({selected}). -1 Bad Score.")
+                bad_score += 1
+                print(f"You selected the smaller value ({selected}). +1 Bad Score.")
 
     print("\n--- Final Results ---")
     print(f"Good Score: {good_score}")
@@ -41,4 +41,4 @@ graph = {
     'J': []
 }
 
-methode(graph)
+play_game(graph)
