@@ -1,0 +1,48 @@
+class VacuumCleaner:
+    def __init__(self, n=5):  # fixed __init__
+        self.rooms = [f'Room{i}' for i in range(n)]
+        self.location = self.rooms[0]
+        self.room_status = {room: 'Dirty' for room in self.rooms}
+
+    def percept(self):
+        return self.room_status[self.location]
+
+    def act(self, action):
+        index = self.rooms.index(self.location)
+        if action == 'MoveRight' and index < len(self.rooms) - 1:
+            self.location = self.rooms[index + 1]
+        elif action == 'MoveLeft' and index > 0:
+            self.location = self.rooms[index - 1]
+        elif action == 'Suck':
+            self.room_status[self.location] = 'Clean'
+
+def agent_function(percept, location, rooms):
+    if percept == 'Dirty':
+        return 'Suck'
+    else:
+        index = rooms.index(location)
+        if index < len(rooms) - 1:
+            return 'MoveRight'
+        elif index > 0:
+            return 'MoveLeft'
+        else:
+            return 'NoOp'
+
+if __name__ == "__main__":  # fixed __name__
+    n = int(input("Enter number of rooms (n ≥ 2): "))
+    if n < 2:
+        print("Please enter a number greater than or equal to 2.")
+    else:
+        vacuum = VacuumCleaner(n)
+        step = 0
+        while True:
+            percept = vacuum.percept()
+            location = vacuum.location
+            action = agent_function(percept, location, vacuum.rooms)
+            print(f"Step {step}: Percept: ({percept}, {location}), Action: {action}")
+            vacuum.act(action)
+            print(f"Location: {vacuum.location}, Room Status: {vacuum.room_status}\n")
+            step += 1
+            if all(status == 'Clean' for status in vacuum.room_status.values()):
+                print("All rooms are clean. Agent stopped.")
+                break
