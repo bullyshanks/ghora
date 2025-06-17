@@ -1,0 +1,76 @@
+# Board setup
+Q_board = [
+    [0, 0, 0, 0],
+    [1, 1, 1, 1],
+    [0, 1, 0, 1],
+    [1, 0, 1, 0]
+]
+
+score = {"Player 1": 0, "Player 2": 0}
+turn = 0
+
+# Game loop
+while True:
+    # Show board
+    print("\nBoard:")
+    for row in Q_board:
+        print(row)
+    
+    # Show score
+    print(f"Player 1: {score['Player 1']}, Player 2: {score['Player 2']}")
+
+    # Menu
+    print("\nOptions:")
+    print("1. Horizontal (first row)")
+    print("2. Vertical (first column)")
+    print("3. Right diagonal")
+    print("4. Left diagonal")
+    print("5. Make a move")
+    print("6. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        print("Horizontal:", Q_board[0])
+
+    elif choice == "2":
+        print("Vertical:")
+        for row in Q_board:
+            print(row[0])
+
+    elif choice == "3":
+        print("Right diagonal:")
+        for i in range(4):
+            print(Q_board[i][3 - i])
+
+    elif choice == "4":
+        print("Left diagonal:")
+        for i in range(4):
+            print(Q_board[i][i])
+
+    elif choice == "5":
+        player = "Player 1" if turn % 2 == 0 else "Player 2"
+        print(f"{player}'s turn")
+        try:
+            row = int(input("Row (0-3): "))
+            col = int(input("Col (0-3): "))
+            if 0 <= row <= 3 and 0 <= col <= 3:
+                if Q_board[row][col] == 1:
+                    print("Good move!")
+                    score[player] += 1
+                    Q_board[row][col] = 0
+                    turn += 1
+                else:
+                    print("Invalid move, spot taken or 0.")
+            else:
+                print("Row and col must be 0-3.")
+        except:
+            print("Enter numbers only.")
+
+    elif choice == "6":
+        print("Game over!")
+        print(f"Final score: Player 1 = {score['Player 1']}, Player 2 = {score['Player 2']}")
+        break
+
+    else:
+        print("Invalid choice.")
