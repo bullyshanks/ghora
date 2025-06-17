@@ -1,0 +1,102 @@
+pip install opencv-python matplotlib
+import cv2
+import matplotlib.pyplot as plt
+
+# Method 1: cv2.imread() – Read the image
+img = cv2.imread('image.png')  # Replace with your image path
+
+# Method 2: cv2.cvtColor() – Convert image to grayscale
+gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+# Method 3: cv2.GaussianBlur() – Apply Gaussian blur to the image
+blurred_img = cv2.GaussianBlur(img, (15, 15), 0)
+
+# Display the original image using matplotlib (converted to RGB for correct color representation)
+img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+plt.imshow(img_rgb)
+plt.title('Original Image')
+plt.axis('off')  # Hide axes
+plt.show()
+
+# Display the grayscale image using matplotlib
+gray_img_rgb = cv2.cvtColor(gray_img, cv2.COLOR_BGR2RGB)
+plt.imshow(gray_img, cmap='gray')
+plt.title('Grayscale Image')
+plt.axis('off')
+plt.show()
+
+# Display the blurred image using matplotlib
+blurred_img_rgb = cv2.cvtColor(blurred_img, cv2.COLOR_BGR2RGB)
+plt.imshow(blurred_img_rgb)
+plt.title('Blurred Image')
+plt.axis('off')
+plt.show()
+**********************************************************************************************
+
+import matplotlib.pyplot as plt
+
+# Method 1: plt.plot()
+x = [0, 1, 2, 3, 4]
+y = [0, 1, 4, 9, 16]
+plt.plot(x, y)
+plt.title('Line Plot')
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.show()
+
+# Method 2: plt.hist()
+data = [1, 2, 2, 3, 4, 4, 4, 4, 5, 6]
+plt.hist(data, bins=5)
+plt.title('Histogram')
+plt.xlabel('Value')
+plt.ylabel('Frequency')
+plt.show()
+
+# Method 3: plt.bar()
+categories = ['A', 'B', 'C', 'D']
+values = [3, 7, 2, 5]
+plt.bar(categories, values)
+plt.title('Bar Chart')
+plt.show()
+********************************************************************************************
+
+import matplotlib.pyplot as plt
+
+# Method 1: plt.scatter()
+x = [1, 2, 3, 4]
+y = [5, 6, 7, 8]
+plt.scatter(x, y, color='red')
+plt.title('Scatter Plot')
+plt.show()
+
+# Method 2: plt.plot()
+x = [0, 1, 2, 3]
+y = [0, 1, 4, 9]
+plt.plot(x, y)
+plt.title('Simple Line Plot')
+plt.show()
+
+# Method 3: plt.pie()
+labels = ['A', 'B', 'C', 'D']
+sizes = [25, 35, 20, 20]
+plt.pie(sizes, labels=labels, autopct='%1.1f%%')
+plt.title('Pie Chart')
+plt.show()
+************************************************************************************************
+
+import tkinter as tk
+
+# Method 1: tk.Label()
+root = tk.Tk()
+label = tk.Label(root, text="Hello, Tkinter!")
+label.pack()
+
+# Method 2: tk.Button()
+def on_click():
+    print("Button clicked!")
+
+button = tk.Button(root, text="Click Me", command=on_click)
+button.pack()
+
+# Method 3: root.mainloop()
+root.mainloop()
